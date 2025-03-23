@@ -1,20 +1,16 @@
-'use client';
-import Navbar from '@/components/Navbar';
-
 import '@/assets/styles/globals.css';
+
+// Export metadata for automatic head handling
+export const metadata = {
+	title: 'Joe Reis Portfolio',
+	description: 'Joe Reis Portfolio',
+};
 
 const RootLayout = ({ children }) => {
 	return (
-		<html lang='en' className='scroll-smooth flex flex-col'>
-			<head>
-				<title>Joe's Portfolio</title>
-				<meta name='description' content='Joe Reis Portfolio' />
-				<meta name='viewport' content='width=device-width, initial-scale=1' />
-				<link rel='icon' href='/favicon.ico' />
-			</head>
-			<body className='bg-white flex flex-col'>
-				<main className='flex flex-col'>{children}</main>
-				<Navbar />
+		<html lang='en' className='scroll-smooth'>
+			<body className='bg-white'>
+				<main>{children}</main>
 			</body>
 		</html>
 	);

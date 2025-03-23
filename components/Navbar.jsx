@@ -12,10 +12,10 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className='fixed w-full h-30 shadow-xl z-[100]'>
-			<div className='flex justify-start items-center w-full h-full px-2 2xl:px-16'>
+		<div className='w-full h-30 shadow-xl z-[100]'>
+			<div className='flex justify-center items-center px-2 2xl:px-16 border-shadow shadow-lg shadow-gray-900'>
 				<div>
-					<ul className='hidden md:flex'>
+					<ul className='hidden md:flex text-black'>
 						<Link href='/'>
 							<li className='ml-10 text-sm uppercase hover:border-b'>Home</li>
 						</Link>
@@ -64,16 +64,16 @@ const Navbar = () => {
 								<p className='uppercase tracking-widest text-[#5651e5]'>Joe Reis's Portfolio</p>
 							</div>
 							<div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer haver:scale-105 ease-in duration-300'>
+								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
 									<FaLinkedinIn />
 								</div>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer haver:scale-105 ease-in duration-300'>
+								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
 									<FaGithub />
 								</div>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer haver:scale-105 ease-in duration-300'>
+								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
 									<AiOutlineMail />
 								</div>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer haver:scale-105 ease-in duration-300'>
+								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
 									<BsFillPersonLinesFill />
 								</div>
 							</div>
