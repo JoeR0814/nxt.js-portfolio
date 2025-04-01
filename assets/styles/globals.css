@@ -4,19 +4,38 @@
 
 @keyframes codeRain {
 	0% {
-		transform: translateY(-100%);
-		opacity: 0;
-	}
-	50% {
+		transform: translateY(-10%);
 		opacity: 1;
 	}
 	100% {
-		transform: translateY(100vh);
+		transform: translateY(110vh);
 		opacity: 0;
 	}
 }
 
 .animate-codeRain {
-	animation: codeRain 5s linear infinite;
+	animation: codeRain linear infinite;
+	position: absolute;
+}
+
+/* Dark mode styles */
+.bg-black {
+	background-color: black;
+}
+.text-white {
+	color: white;
+}
+
+/* Light mode styles */
+.bg-white {
+	background-color: white;
+}
+.text-black {
+	color: black;
+}
+
+/* Additional styles for transition, if needed */
+.transition {
+	transition: all 0.3s ease-in-out;
 }
 
