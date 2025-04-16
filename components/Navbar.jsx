@@ -13,7 +13,7 @@ const Navbar = () => {
 
 	return (
 		<div className='w-full h-30 shadow-xl z-[100]'>
-			<div className='flex justify-center items-center px-2 2xl:px-16 border-shadow shadow-lg shadow-gray-900'>
+			<div className='flex justify-center items-center px-2 2xl:px-16 border-shadow'>
 				<div>
 					<ul className='hidden md:flex text-black'>
 						<Link href='/'>
@@ -22,9 +22,9 @@ const Navbar = () => {
 						<Link href='/about'>
 							<li className='ml-10 text-sm uppercase hover:border-b'>About</li>
 						</Link>
-						<Link href='/projects'>
+						{/* <Link href='/projects'>
 							<li className='ml-10 text-sm uppercase hover:border-b'>Projects</li>
-						</Link>
+						</Link> */}
 						<Link href='/contact'>
 							<li className='ml-10 text-sm uppercase hover:border-b'>Contact</li>
 						</Link>
@@ -53,9 +53,9 @@ const Navbar = () => {
 								<Link href='/about'>
 									<li className='py-4 text-sm'>About</li>
 								</Link>
-								<Link href='/projects'>
+								{/* <Link href='/projects'>
 									<li className='py-4 text-sm'>Projects</li>
-								</Link>
+								</Link> */}
 								<Link href='/contact'>
 									<li className='py-4 text-sm'>Contact</li>
 								</Link>
