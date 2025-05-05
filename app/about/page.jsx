@@ -85,7 +85,7 @@ const About = () => {
 		{
 			title: 'Self-taught Developer',
 			company: 'Personal Projects',
-			period: '2024 - Present',
+			period: '2023 - Present',
 			description:
 				'Built various personal projects to learn web development fundamentals and modern frameworks.',
 		},
