@@ -1,43 +1,56 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { FaGithub, FaLinkedinIn, FaReact } from 'react-icons/fa';
+import { useState, useEffect, useRef } from 'react';
+import { FaGithub, FaLinkedinIn, FaArrowDown, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { HiOutlineMail } from 'react-icons/hi';
 import { TypeAnimation } from 'react-type-animation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ErrorBoundary } from 'react-error-boundary';
-import Navbar from '../components/Navbar';
-import InterviewButton from '../components/InterviewButton';
+import Navbar from '@/components/Navbar';
+import { useTheme } from '@/components/ThemeProvider';
 
 const SocialLinks = () => (
-	<div className='flex gap-4 justify-center mt-4'>
-		<a href='https://github.com/yourusername' target='_blank' rel='noopener noreferrer'>
-			<FaGithub className='text-2xl hover:text-green-400 transition-colors' />
-		</a>
-		<a href='https://linkedin.com/in/yourusername' target='_blank' rel='noopener noreferrer'>
-			<FaLinkedinIn className='text-2xl hover:text-red-400 transition-colors' />
-		</a>
-	</div>
-);
-
-const skills = ['JavaScript', 'React', 'Next.js', 'Vite', 'Tailwind CSS', 'HTML5', 'CSS3', 'Git'];
-
-const SkillBadges = () => (
-	<div className='flex flex-wrap gap-2 justify-center mt-6'>
-		{skills.map((skill) => (
-			<span key={skill} className='px-3 py-1 bg-blue-400/10 text-blue-400 rounded-full text-sm'>
-				{skill}
-			</span>
-		))}
+	<div className='flex gap-6 justify-center mt-8'>
+		<motion.a
+			href='https://github.com/JoeR0814'
+			target='_blank'
+			rel='noopener noreferrer'
+			whileHover={{ scale: 1.2 }}
+			whileTap={{ scale: 0.9 }}
+			className='text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+		>
+			<FaGithub className='text-2xl' />
+		</motion.a>
+		<motion.a
+			href='https://www.linkedin.com/in/joe-reis-b289802a2/'
+			target='_blank'
+			rel='noopener noreferrer'
+			whileHover={{ scale: 1.2 }}
+			whileTap={{ scale: 0.9 }}
+			className='text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+		>
+			<FaLinkedinIn className='text-2xl' />
+		</motion.a>
+		<motion.a
+			href='mailto:Joe.Reis.Dev@gmail.com'
+			whileHover={{ scale: 1.2 }}
+			whileTap={{ scale: 0.9 }}
+			className='text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+		>
+			<HiOutlineMail className='text-2xl' />
+		</motion.a>
 	</div>
 );
 
 const ScrollIndicator = () => (
-	<div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce'>
-		<div className='w-6 h-10 border-2 border-red-400 rounded-full flex justify-center'>
-			<div className='w-2 h-2 bg-red-400 rounded-full mt-2 animate-scroll' />
-		</div>
-	</div>
+	<motion.div
+		className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
+		animate={{ y: [0, 10, 0] }}
+		transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+	>
+		<FaArrowDown className='text-primary-500 dark:text-primary-400 text-2xl' />
+	</motion.div>
 );
 
 const ErrorFallback = ({ error }) => (
@@ -47,10 +60,8 @@ const ErrorFallback = ({ error }) => (
 	</div>
 );
 
-const HomePage = () => {
-	const [isDarkMode, setIsDarkMode] = useState(true);
-	const [imageLoaded, setImageLoaded] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+const CodeSymbols = () => {
+	const { theme } = useTheme();
 	const [randomStyles, setRandomStyles] = useState([]);
 
 	const codeSymbols = [
@@ -66,133 +77,318 @@ const HomePage = () => {
 		'[ ]',
 		'<div>',
 		'</div>',
+		'function',
+		'return',
+		'import',
+		'export',
+		'async',
+		'await',
+		'useState',
+		'useEffect',
+		'map',
+		'filter',
+		'reduce',
+		'props',
+		'state',
+		'class',
+		'extends',
+		'this',
+		'super',
+		'render',
+		'component',
+		'<React.Fragment>',
+		'&&',
+		'||',
+		'??',
+		'?.',
+		'===',
+		'!==',
+		'++',
+		'--',
+		'+=',
+		'*=',
+		'/=',
+		'%=',
+		'try',
+		'catch',
+		'finally',
+		'throw',
+		'Promise',
+		'.then()',
+		'.catch()',
+		'async/await',
 	];
 
 	useEffect(() => {
-		const styles = Array.from({ length: 40 }).map((_, i) => ({
-			left: `${i * 2.5}%`,
-			animationDuration: `${(Math.random() * 5 + 3).toFixed(2)}s`,
+		const styles = Array.from({ length: 150 }).map((_, i) => ({
+			left: `${Math.random() * 100}%`,
+			top: `-${Math.random() * 20}%`, // Start above the viewport
+			animationDuration: `${(Math.random() * 12 + 8).toFixed(2)}s`,
 			animationDelay: `${(Math.random() * 5).toFixed(2)}s`,
-			fontSize: `${(Math.random() * 12 + 16).toFixed(2)}px`,
+			fontSize: `${(Math.random() * 16 + 12).toFixed(2)}px`,
+			opacity: Math.random() * 0.7 + 0.2,
 			symbol: codeSymbols[Math.floor(Math.random() * codeSymbols.length)],
+			rotate: `${Math.random() * 360}deg`,
 		}));
 		setRandomStyles(styles);
 	}, []);
 
-	useEffect(() => {
-		if (isDarkMode) {
-			document.body.classList.add('bg-black', 'text-white');
-			document.body.classList.remove('bg-white', 'text-black');
-		} else {
-			document.body.classList.add('bg-white', 'text-black');
-			document.body.classList.remove('bg-black', 'text-white');
-		}
-	}, [isDarkMode]);
+	return (
+		<div className='absolute inset-0 z-0 pointer-events-none overflow-hidden'>
+			{randomStyles.map((style, i) => (
+				<div
+					key={i}
+					className={`absolute text-primary-500/80 dark:text-primary-500/50 animate-codeRain font-mono`}
+					style={{
+						left: style.left,
+						top: style.top,
+						animationDuration: style.animationDuration,
+						animationDelay: style.animationDelay,
+						fontSize: style.fontSize,
+						'--opacity': style.opacity,
+						'--rotate': style.rotate,
+					}}
+				>
+					{style.symbol}
+				</div>
+			))}
+		</div>
+	);
+};
 
-	useEffect(() => {
-		setIsLoading(false);
-	}, []);
+const HomePage = () => {
+	const { theme } = useTheme();
+	const [imageLoaded, setImageLoaded] = useState(false);
+	const heroRef = useRef(null);
+	const { scrollYProgress } = useScroll({
+		target: heroRef,
+		offset: ['start start', 'end start'],
+	});
 
-	const toggleTheme = () => {
-		setIsDarkMode(!isDarkMode);
-	};
+	const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+	const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+	const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
 	return (
 		<ErrorBoundary FallbackComponent={ErrorFallback}>
-			<div className='relative w-full min-h-screen flex flex-col items-center bg-white text-white overflow-hidden'>
-				<div className='absolute inset-0 z-0 pointer-events-none overflow-hidden'>
-					{randomStyles.map((style, i) => (
-						<div
-							key={i}
-							className='absolute text-blue-400 opacity-50 animate-codeRain'
-							style={{
-								left: style.left,
-								animationDuration: style.animationDuration,
-								animationDelay: style.animationDelay,
-								fontSize: style.fontSize,
-							}}
-						>
-							{style.symbol}
+			<Navbar />
+
+			{/* Hero Section */}
+			<motion.section
+				ref={heroRef}
+				style={{ opacity, scale, y }}
+				className='relative min-h-screen flex flex-col items-center justify-center pt-20 pb-10 px-4 overflow-hidden'
+			>
+				<CodeSymbols />
+
+				<div className='container-custom flex flex-col items-center text-center z-10'>
+					<motion.div
+						initial={{ scale: 0.8, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						transition={{ duration: 0.5 }}
+						className='relative mb-8'
+					>
+						{!imageLoaded && (
+							<div className='absolute inset-0 bg-light-300 dark:bg-dark-100 animate-pulse rounded-full' />
+						)}
+						<div className='relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48'>
+							<Image
+								src='/profilePic.jpg'
+								fill
+								sizes='(max-width: 640px) 8rem, (max-width: 768px) 10rem, 12rem'
+								className={`rounded-full object-cover border-4 border-primary-500 dark:border-primary-400 shadow-lg transition-opacity duration-500 ${
+									imageLoaded ? 'opacity-100' : 'opacity-0'
+								}`}
+								alt='Joe Reis - Frontend Developer'
+								onLoad={() => setImageLoaded(true)}
+								priority
+							/>
+							<div className='absolute inset-0 rounded-full bg-primary-500/10 dark:bg-primary-400/10 animate-pulse'></div>
 						</div>
-					))}
-				</div>
+					</motion.div>
 
-				<button
-					onClick={toggleTheme}
-					className='fixed top-4 right-4 p-2 rounded-full bg-red-400/10'
-				>
-					{isDarkMode ? '🌙' : '☀️'}
-				</button>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.2, duration: 0.5 }}
+					>
+						<h1 className='text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-dark-200 dark:text-light-100'>
+							Hi, I'm <span className='text-gradient'>Joe Reis</span>
+						</h1>
 
-				<div className='relative'>
-					{!imageLoaded && (
-						<div className='absolute inset-0 bg-gray-200 animate-pulse rounded-full' />
-					)}
-					<Image
-						src='/profilePic.jpg'
-						width={200}
-						height={200}
-						className={`rounded-full object-cover w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-4 border border-blue-300 transition-opacity duration-300 ${
-							imageLoaded ? 'opacity-100' : 'opacity-0'
-						}`}
-						alt='Profile Picture'
-						onLoad={() => setImageLoaded(true)}
-						priority
-					/>
-				</div>
+						<div className='flex items-center justify-center gap-2 mb-6'>
+							<FaCode className='text-primary-600 dark:text-primary-400' />
+							<h2 className='text-xl sm:text-2xl md:text-3xl font-medium text-dark-100 dark:text-light-200'>
+								Frontend Developer
+							</h2>
+						</div>
 
-				<h1 className='text-md sm:text-3xl md:text-5xl font-bold px-4 md:px-6 text-blue-400'>
-					I'm A Front-End Developer with,
-				</h1>
-				<div className='h-[40px] sm:h-[50px] md:h-[60px] flex justify-center items-center'>
-					<TypeAnimation
-						sequence={[
-							'JAVASCRIPT,',
-							2000,
-							'REACT.JS,',
-							2000,
-							'NEXT.JS,',
-							2000,
-							'VITE.JS, &',
-							2000,
-							'TAILWIND CSS!',
-							2000,
-						]}
-						cursor={true}
-						repeat={Infinity}
-						className='text-lg sm:text-2xl md:text-4xl italic font-bold text-blue-400'
-					/>
-				</div>
+						<div className='h-[40px] sm:h-[50px] md:h-[60px] flex justify-center items-center mb-6'>
+							<TypeAnimation
+								sequence={[
+									'Building with React',
+									1500,
+									'Crafting with Next.js',
+									1500,
+									'Styling with Tailwind CSS',
+									1500,
+									'Creating modern UIs',
+									1500,
+									'Developing responsive layouts',
+									1500,
+									'Optimizing for performance',
+									1500,
+									'Implementing animations',
+									1500,
+									'Writing clean code',
+									1500,
+									'Solving complex problems',
+									1500,
+								]}
+								wrapper='span'
+								cursor={true}
+								repeat={Infinity}
+								speed={50}
+								deletionSpeed={65}
+								className='text-lg sm:text-xl md:text-2xl font-medium text-primary-600 dark:text-primary-400'
+							/>
+						</div>
 
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
-					className='relative z-10 max-w-[1240px] w-full text-center mt-10 p-4 sm:p-8'
-				>
-					<div className='container mx-auto flex flex-col justify-center items-center w-full sm:w-3/4 md:w-1/2 border border-blue-300 bg-white rounded-lg shadow-lg p-4 sm:p-8'>
-						<Navbar />
-						<FaReact className='w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mt-10' color='#61DAFB' />
-						<h2 className='uppercase text-xs sm:text-sm tracking-widest pt-4 text-black'>
-							Welcome!
-						</h2>
-						<p className='text-sm sm:text-base leading-relaxed pb-6 text-gray-600'>
-							My Name Is Joe, I am a front-end developer specializing in React, Vite, Next.js, and
-							Tailwind CSS. I focus on building fast, responsive, and user-friendly web
-							applications.
+						<p className='max-w-2xl mx-auto text-dark-100 dark:text-light-300 mb-8 text-base sm:text-lg'>
+							I specialize in building modern, responsive web applications with a focus on
+							performance, accessibility, and user experience.
 						</p>
+
+						<div className='flex flex-col sm:flex-row gap-4 justify-center'>
+							<Link href='/about'>
+								<motion.button
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									className='btn-primary'
+								>
+									About Me
+								</motion.button>
+							</Link>
+							<Link href='/contact'>
+								<motion.button
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									className='btn-outline'
+								>
+									Let's Connect
+								</motion.button>
+							</Link>
+						</div>
+
 						<SocialLinks />
-						<SkillBadges />
-						<Link href='/contact'>
-							<button className='mt-6 px-6 py-3 bg-blue-400 text-black font-bold rounded-lg hover:bg-blue-500 transition-colors'>
-								Let's Work Together
-							</button>
-						</Link>
-					</div>
-				</motion.div>
+					</motion.div>
+				</div>
 
 				<ScrollIndicator />
-			</div>
+			</motion.section>
+
+			{/* Featured Projects Section */}
+			<section className='section bg-light-200 dark:bg-dark-100'>
+				<div className='container-custom'>
+					<div className='text-center mb-12'>
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, amount: 0.2 }}
+							transition={{ duration: 0.5 }}
+						>
+							<h2 className='text-gradient mb-4'>Featured Projects</h2>
+							<p className='text-dark-100 dark:text-light-300 max-w-2xl mx-auto'>
+								Here are some of my recent projects. Check out my About page for more.
+							</p>
+						</motion.div>
+					</div>
+
+					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+						{[
+							{
+								title: 'Portfolio With Next.js',
+								description: 'Modern portfolio site built with Next.js and Tailwind CSS',
+								link: 'https://github.com/JoeR0814/nxt.js-portfolio.git',
+								tech: ['Next.js', 'React', 'Tailwind CSS'],
+							},
+							{
+								title: 'Portfolio With Vite',
+								description: 'Fast, responsive portfolio using Vite and modern web technologies',
+								link: 'https://github.com/JoeR0814/myportfolio.git',
+								tech: ['Vite', 'React', 'Tailwind CSS'],
+							},
+							{
+								title: 'Painting Board',
+								description: 'Interactive drawing application with various tools and features',
+								link: 'https://github.com/JoeR0814/drawing-app-html-5',
+								tech: ['HTML5 Canvas', 'CSS', 'JavaScript'],
+							},
+						].map((project, index) => (
+							<motion.div
+								key={index}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, amount: 0.1 }}
+								transition={{ duration: 0.5, delay: index * 0.1 }}
+								className='card card-hover'
+							>
+								<div className='flex items-center justify-center mb-4 text-primary-500 dark:text-primary-400'>
+									<FaLaptopCode size={40} />
+								</div>
+								<h3 className='text-xl font-bold mb-2 text-dark-200 dark:text-light-100'>
+									{project.title}
+								</h3>
+								<p className='text-dark-100 dark:text-light-300 mb-4'>{project.description}</p>
+								<div className='flex flex-wrap gap-2 mb-4'>
+									{project.tech.map((tech, i) => (
+										<span
+											key={i}
+											className='px-2 py-1 text-xs bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full'
+										>
+											{tech}
+										</span>
+									))}
+								</div>
+								<a
+									href={project.link}
+									target='_blank'
+									rel='noopener noreferrer'
+									className='text-primary-600 dark:text-primary-400 hover:underline inline-flex items-center'
+								>
+									View Project
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										className='h-4 w-4 ml-1'
+										fill='none'
+										viewBox='0 0 24 24'
+										stroke='currentColor'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+										/>
+									</svg>
+								</a>
+							</motion.div>
+						))}
+					</div>
+
+					<div className='text-center mt-12'>
+						<Link href='/about'>
+							<motion.button
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
+								className='btn-secondary'
+							>
+								View All Projects
+							</motion.button>
+						</Link>
+					</div>
+				</div>
+			</section>
 		</ErrorBoundary>
 	);
 };

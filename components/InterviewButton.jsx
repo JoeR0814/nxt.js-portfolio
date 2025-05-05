@@ -1,79 +1,90 @@
 'use client';
-import Link from 'next/link';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaQuestionCircle, FaArrowRight } from 'react-icons/fa';
 
 const InterviewButton = () => {
+	const [isOpen, setIsOpen] = useState(false);
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+
+	const questions = [
+		{
+			question: 'What is your favorite programming language?',
+			answer:
+				'JavaScript is my favorite programming language because of its versatility and the ability to build both frontend and backend applications.',
+		},
+		{
+			question: 'What projects are you currently working on?',
+			answer:
+				'I am currently working on building my portfolio website using Next.js and enhancing my skills in React and modern JavaScript frameworks.',
+		},
+		{
+			question: 'What are your career goals?',
+			answer:
+				'My goal is to become a senior frontend developer and eventually lead a team of developers to build innovative web applications.',
+		},
+	];
+
+	const handleNextQuestion = () => {
+		if (currentQuestion < questions.length - 1) {
+			setCurrentQuestion(currentQuestion + 1);
+		} else {
+			setCurrentQuestion(0);
+		}
+	};
+
 	return (
-		<div className='w-full flex justify-center items-center px-4'>
-			<div className='w-full max-w-xl bg-white shadow-lg rounded-lg p-6 md:p-8 border border-gray-200'>
-				<h1 className='text-2xl font-bold text-center mb-4'>Let's Get In Touch</h1>
-				<p className='text-center text-gray-600 mb-6'>Fill out the form below to contact me!</p>
+		<div className='flex flex-col items-center mt-8'>
+			<motion.button
+				onClick={() => setIsOpen(!isOpen)}
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+				className='btn-primary flex items-center gap-2'
+			>
+				<FaQuestionCircle />
+				{isOpen ? 'Close Interview' : 'Interview Me'}
+			</motion.button>
 
-				<form className='space-y-4'>
-					<div className='grid md:grid-cols-2 gap-4'>
-						<div className='flex flex-col'>
-							<label className='uppercase text-sm font-semibold text-gray-700'>First Name</label>
-							<input
-								className='border rounded-lg p-3 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400'
-								type='text'
-								placeholder='John'
-							/>
+			<AnimatePresence>
+				{isOpen && (
+					<motion.div
+						initial={{ opacity: 0, y: -20 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						transition={{ duration: 0.3 }}
+						className='mt-6 card w-full max-w-md'
+					>
+						<div className='flex items-center gap-2 mb-4 text-primary-600 dark:text-primary-400'>
+							<FaQuestionCircle />
+							<h3 className='font-bold text-lg text-dark-200 dark:text-light-100'>
+								Question {currentQuestion + 1} of {questions.length}
+							</h3>
 						</div>
-						<div className='flex flex-col'>
-							<label className='uppercase text-sm font-semibold text-gray-700'>Last Name</label>
-							<input
-								className='border rounded-lg p-3 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400'
-								type='text'
-								placeholder='Doe'
-							/>
+
+						<div className='mb-6'>
+							<h4 className='font-medium text-dark-200 dark:text-light-100 mb-2'>
+								{questions[currentQuestion].question}
+							</h4>
+							<p className='text-dark-100 dark:text-light-300'>
+								{questions[currentQuestion].answer}
+							</p>
 						</div>
-					</div>
 
-					<div className='flex flex-col'>
-						<label className='uppercase text-sm font-semibold text-gray-700'>Email</label>
-						<input
-							className='border rounded-lg p-3 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400'
-							type='email'
-							placeholder='example@email.com'
-						/>
-					</div>
-
-					<div className='flex flex-col'>
-						<label className='uppercase text-sm font-semibold text-gray-700'>Phone Number</label>
-						<input
-							className='border rounded-lg p-3 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400'
-							type='text'
-							placeholder='+1 234 567 890'
-						/>
-					</div>
-
-					<div className='flex flex-col'>
-						<label className='uppercase text-sm font-semibold text-gray-700'>Message</label>
-						<textarea
-							className='border rounded-lg p-3 border-gray-300 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400'
-							placeholder='Your message...'
-						></textarea>
-					</div>
-
-					<button className='w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition'>
-						Send Message
-					</button>
-				</form>
-			</div>
+						<motion.button
+							onClick={handleNextQuestion}
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							className='btn-secondary flex items-center gap-2 text-sm'
+						>
+							Next Question
+							<FaArrowRight />
+						</motion.button>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };
 
 export default InterviewButton;
-
-{
-	/* Email Contact Section */
-}
-{
-	/* <div className='mt-8 text-center'>
-  <h2 className='text-xl font-semibold text-gray-700'>Contact Me by Email</h2>
-  <a href='mailto:Joe.Reis.Dev@gmail.com' className='text-blue-600 hover:underline'>
-    Joe.Reis.Dev@gmail.com
-  </a>
-</div> */
-}
 

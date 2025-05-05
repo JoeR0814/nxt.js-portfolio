@@ -1,87 +1,207 @@
 'use client';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { BsFillPersonLinesFill } from 'react-icons/bs';
+import { BsFillPersonLinesFill, BsSun, BsMoon } from 'react-icons/bs';
+import { useTheme } from './ThemeProvider';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+	const { theme, toggleTheme } = useTheme();
+
 	const handleNav = () => {
 		setNav(!nav);
 	};
 
+	// Handle scroll effect
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 20) {
+				setScrolled(true);
+			} else {
+				setScrolled(false);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
 	return (
-		<div className='w-full h-30 shadow-xl z-[100]'>
-			<div className='flex justify-center items-center px-2 2xl:px-16 border-shadow'>
-				<div>
-					<ul className='hidden md:flex text-black'>
-						<Link href='/'>
-							<li className='ml-10 text-sm uppercase hover:border-b'>Home</li>
-						</Link>
-						<Link href='/about'>
-							<li className='ml-10 text-sm uppercase hover:border-b'>About</li>
-						</Link>
-						{/* <Link href='/projects'>
-							<li className='ml-10 text-sm uppercase hover:border-b'>Projects</li>
-						</Link> */}
-						<Link href='/contact'>
-							<li className='ml-10 text-sm uppercase hover:border-b'>Contact</li>
-						</Link>
-					</ul>
-					<div className='md:hidden'>
-						<AiOutlineMenu size={25} onClick={handleNav} />
+		<header
+			className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${
+				scrolled
+					? 'bg-white/80 dark:bg-dark-200/80 backdrop-blur-md shadow-md py-2'
+					: 'bg-transparent py-4'
+			}`}
+		>
+			<div className='container-custom flex justify-between items-center'>
+				{/* Logo */}
+				<Link href='/' className='flex items-center gap-2'>
+					<div className='relative w-10 h-10 overflow-hidden rounded-full border-2 border-primary-500 dark:border-primary-400'>
+						<Image
+							src='/joe-logo.webp'
+							alt='Joe Reis Logo'
+							fill
+							sizes='2.5rem'
+							className='object-cover'
+						/>
 					</div>
+					<span className='font-bold text-xl text-dark-200 dark:text-light-100'>
+						Joe<span className='text-primary-600 dark:text-primary-400'>Reis</span>
+					</span>
+				</Link>
+
+				{/* Desktop Navigation */}
+				<nav className='hidden md:flex items-center gap-8'>
+					<Link href='/' className='nav-link'>
+						Home
+					</Link>
+					<Link href='/about' className='nav-link'>
+						About
+					</Link>
+					<Link href='/contact' className='nav-link'>
+						Contact
+					</Link>
+
+					{/* Theme Toggle */}
+					<button
+						onClick={toggleTheme}
+						className='p-2 rounded-full bg-light-200 dark:bg-dark-100 text-dark-100 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+						aria-label='Toggle theme'
+					>
+						{theme === 'dark' ? <BsSun size={18} /> : <BsMoon size={18} />}
+					</button>
+				</nav>
+
+				{/* Mobile Menu Button */}
+				<div className='md:hidden flex items-center gap-4'>
+					<button
+						onClick={toggleTheme}
+						className='p-2 rounded-full bg-light-200 dark:bg-dark-100 text-dark-100 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+						aria-label='Toggle theme'
+					>
+						{theme === 'dark' ? <BsSun size={18} /> : <BsMoon size={18} />}
+					</button>
+					<button
+						onClick={handleNav}
+						className='p-2 text-dark-200 dark:text-light-100'
+						aria-label='Toggle mobile menu'
+					>
+						<AiOutlineMenu size={25} />
+					</button>
 				</div>
 			</div>
 
 			{/* Mobile Menu Overlay */}
 			{nav && (
-				<div className='fixed left-0 top-0 w-full h-screen bg-black/70 cursor-pointer'>
-					<div className='fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500 cursor-pointer'>
-						<div className='flex justify-end'>
-							<AiOutlineClose size={25} onClick={handleNav} />
+				<div className='fixed inset-0 bg-black/70 z-50' onClick={handleNav}>
+					<motion.div
+						initial={{ x: '-100%' }}
+						animate={{ x: 0 }}
+						transition={{ duration: 0.3, ease: 'easeOut' }}
+						className='fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-light-100 dark:bg-dark-100 p-6 overflow-y-auto'
+						onClick={(e) => e.stopPropagation()}
+					>
+						<div className='flex justify-between items-center mb-8'>
+							<Link href='/' className='flex items-center gap-2' onClick={() => setNav(false)}>
+								<div className='relative w-8 h-8 overflow-hidden rounded-full border-2 border-primary-500'>
+									<Image
+										src='/joe-logo.webp'
+										alt='Joe Reis Logo'
+										fill
+										sizes='2rem'
+										className='object-cover'
+									/>
+								</div>
+								<span className='font-bold text-lg text-dark-200 dark:text-light-100'>
+									Joe<span className='text-primary-600 dark:text-primary-400'>Reis</span>
+								</span>
+							</Link>
+							<button
+								onClick={handleNav}
+								className='p-2 text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400'
+								aria-label='Close menu'
+							>
+								<AiOutlineClose size={20} />
+							</button>
 						</div>
-						<div className='border-b border-gray-300 mt-4'>
-							<p className='w-[85%] md:w-[90%] py-4'>Joe Reis's Next.js Portfolio Project</p>
+
+						<div className='border-b border-light-300 dark:border-dark-200 pb-4 mb-4'>
+							<p className='text-dark-100 dark:text-light-300 text-sm'>
+								Frontend Developer Portfolio
+							</p>
 						</div>
-						<div className='py-4 flex flex-col'>
-							<ul className='uppercase'>
-								<Link href='/'>
-									<li className='py-4 text-sm'>Home</li>
-								</Link>
-								<Link href='/about'>
-									<li className='py-4 text-sm'>About</li>
-								</Link>
-								{/* <Link href='/projects'>
-									<li className='py-4 text-sm'>Projects</li>
-								</Link> */}
-								<Link href='/contact'>
-									<li className='py-4 text-sm'>Contact</li>
-								</Link>
+
+						<nav className='mb-8'>
+							<ul className='space-y-4'>
+								<li>
+									<Link
+										href='/'
+										className='block py-2 text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+										onClick={() => setNav(false)}
+									>
+										Home
+									</Link>
+								</li>
+								<li>
+									<Link
+										href='/about'
+										className='block py-2 text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+										onClick={() => setNav(false)}
+									>
+										About
+									</Link>
+								</li>
+								<li>
+									<Link
+										href='/contact'
+										className='block py-2 text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+										onClick={() => setNav(false)}
+									>
+										Contact
+									</Link>
+								</li>
 							</ul>
-							<div className='pt-40'>
-								<p className='uppercase tracking-widest text-[#5651e5]'>Joe Reis's Portfolio</p>
-							</div>
-							<div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-									<FaLinkedinIn />
-								</div>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-									<FaGithub />
-								</div>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-									<AiOutlineMail />
-								</div>
-								<div className='rounded-full shadow-lg shadow-fray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-									<BsFillPersonLinesFill />
-								</div>
+						</nav>
+
+						<div className='mt-auto'>
+							<p className='text-primary-600 dark:text-primary-400 font-medium mb-4'>
+								Connect with me
+							</p>
+							<div className='flex items-center gap-4'>
+								<a
+									href='https://www.linkedin.com/in/joe-reis-b289802a2/'
+									target='_blank'
+									rel='noopener noreferrer'
+									className='p-3 rounded-full bg-light-200 dark:bg-dark-200 text-dark-100 dark:text-light-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all hover:scale-110'
+								>
+									<FaLinkedinIn size={18} />
+								</a>
+								<a
+									href='https://github.com/JoeR0814'
+									target='_blank'
+									rel='noopener noreferrer'
+									className='p-3 rounded-full bg-light-200 dark:bg-dark-200 text-dark-100 dark:text-light-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all hover:scale-110'
+								>
+									<FaGithub size={18} />
+								</a>
+								<a
+									href='mailto:Joe.Reis.Dev@gmail.com'
+									className='p-3 rounded-full bg-light-200 dark:bg-dark-200 text-dark-100 dark:text-light-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all hover:scale-110'
+								>
+									<AiOutlineMail size={18} />
+								</a>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			)}
-		</div>
+		</header>
 	);
 };
 
