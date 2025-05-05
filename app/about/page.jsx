@@ -162,7 +162,7 @@ const About = () => {
 									<FaUserAlt /> Contact Me
 								</Link>
 								<a
-									href='/resume.pdf'
+									href='/myportfolio-resume.pdf'
 									target='_blank'
 									rel='noopener noreferrer'
 									className='btn-secondary flex items-center gap-2'

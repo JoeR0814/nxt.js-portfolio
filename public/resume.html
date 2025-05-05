@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Joe Reis - Resume</title>
+		<style>
+			body {
+				font-family: 'Arial', sans-serif;
+				line-height: 1.6;
+				color: #333;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+			.header {
+				text-align: center;
+				margin-bottom: 20px;
+				border-bottom: 2px solid #0ea5e9;
+				padding-bottom: 20px;
+			}
+			h1 {
+				color: #0ea5e9;
+				margin-bottom: 5px;
+			}
+			.contact-info {
+				margin-bottom: 10px;
+			}
+			.section {
+				margin-bottom: 25px;
+			}
+			h2 {
+				color: #0ea5e9;
+				border-bottom: 1px solid #ddd;
+				padding-bottom: 5px;
+			}
+			.job {
+				margin-bottom: 15px;
+			}
+			.job-title {
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+			.job-company {
+				font-style: italic;
+			}
+			.job-period {
+				color: #666;
+				font-size: 0.9em;
+			}
+			.skills-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+			}
+			.skill {
+				background-color: #f0f9ff;
+				color: #0ea5e9;
+				padding: 5px 10px;
+				border-radius: 15px;
+				font-size: 0.9em;
+			}
+			.project {
+				margin-bottom: 15px;
+			}
+			.project-title {
+				font-weight: bold;
+			}
+			.project-tech {
+				color: #0ea5e9;
+				font-size: 0.9em;
+			}
+			.education {
+				margin-bottom: 15px;
+			}
+			.print-button {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				background-color: #0ea5e9;
+				color: white;
+				border: none;
+				padding: 8px 16px;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			@media print {
+				.print-button {
+					display: none;
+				}
+				body {
+					padding: 0;
+					font-size: 12pt;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button class="print-button" onclick="window.print()">Print/Save as PDF</button>
+
+		<div class="header">
+			<h1>JOE REIS</h1>
+			<div class="contact-info">Frontend Developer</div>
+			<div class="contact-info">
+				Burlington, Vermont | Joe.Reis.Dev@gmail.com | github.com/JoeR0814
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>SUMMARY</h2>
+			<p>
+				Frontend Developer with expertise in React, Next.js, and modern web technologies. Passionate
+				about creating responsive, accessible, and performant web applications with a focus on
+				exceptional user experiences.
+			</p>
+		</div>
+
+		<div class="section">
+			<h2>SKILLS</h2>
+			<div class="skills-list">
+				<span class="skill">JavaScript</span>
+				<span class="skill">React.js</span>
+				<span class="skill">Next.js</span>
+				<span class="skill">Vite.js</span>
+				<span class="skill">HTML5</span>
+				<span class="skill">CSS3</span>
+				<span class="skill">Tailwind CSS</span>
+				<span class="skill">Responsive Design</span>
+				<span class="skill">Git</span>
+				<span class="skill">GitHub</span>
+				<span class="skill">Framer Motion</span>
+				<span class="skill">UI/UX Design</span>
+				<span class="skill">Web Accessibility</span>
+				<span class="skill">Performance Optimization</span>
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>EXPERIENCE</h2>
+
+			<div class="job">
+				<div class="job-title">Frontend Developer</div>
+				<div class="job-company">Freelance</div>
+				<div class="job-period">2024 - Present</div>
+				<ul>
+					<li>Develop responsive web applications using React, Next.js, and Tailwind CSS</li>
+					<li>Implement modern UI designs with a focus on performance and accessibility</li>
+					<li>Collaborate with clients to translate requirements into functional web solutions</li>
+					<li>Optimize website performance and ensure cross-browser compatibility</li>
+				</ul>
+			</div>
+
+			<div class="job">
+				<div class="job-title">Web Development Student</div>
+				<div class="job-company">Goodwin University</div>
+				<div class="job-period">2024</div>
+				<ul>
+					<li>Completed intensive training in full-stack web development</li>
+					<li>Focused on JavaScript, React, and modern web technologies</li>
+					<li>Developed multiple projects to demonstrate proficiency in web development</li>
+					<li>
+						Collaborated with peers on group projects to simulate real-world development
+						environments
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>PROJECTS</h2>
+
+			<div class="project">
+				<div class="project-title">Portfolio With Next.js</div>
+				<div class="project-tech">Next.js, React, Tailwind CSS, Framer Motion</div>
+				<p>Modern portfolio site featuring dark mode, animations, and responsive design.</p>
+			</div>
+
+			<div class="project">
+				<div class="project-title">Portfolio With Vite</div>
+				<div class="project-tech">Vite, React, Tailwind CSS</div>
+				<p>
+					Fast, responsive portfolio using Vite and modern web technologies with optimized
+					performance.
+				</p>
+			</div>
+
+			<div class="project">
+				<div class="project-title">Painting Board</div>
+				<div class="project-tech">HTML5 Canvas, CSS, JavaScript</div>
+				<p>
+					Interactive drawing application with various tools and features built with HTML5 Canvas.
+				</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>EDUCATION</h2>
+
+			<div class="education">
+				<div class="job-title">Web Development Certificate</div>
+				<div class="job-company">Goodwin University</div>
+				<div class="job-period">2024</div>
+			</div>
+		</div>
+
+		<script>
+			// Add a message when the page loads
+			window.onload = function () {
+				alert(
+					"To save as PDF: Click the 'Print/Save as PDF' button, then select 'Save as PDF' in the print dialog.",
+				);
+			};
+		</script>
+	</body>
+</html>
+
