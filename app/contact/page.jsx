@@ -24,27 +24,42 @@ const ContactMe = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate form submission
-		setTimeout(() => {
-			setIsSubmitting(false);
-			setSubmitSuccess(true);
+		try {
+			const formDataToSend = new FormData();
+			formDataToSend.append('name', formData.firstName);
+			formDataToSend.append('subject', formData.subject);
+			formDataToSend.append('email', formData.email);
+			formDataToSend.append('phone', formData.phone);
+			formDataToSend.append('message', formData.message);
 
-			// Reset form after showing success message
-			setTimeout(() => {
-				setSubmitSuccess(false);
+			const response = await fetch('https://getform.io/f/awngrwkb', {
+				method: 'POST',
+				body: formDataToSend,
+			});
+
+			if (response.ok) {
+				setSubmitSuccess(true);
 				setFormData({
-					firstName: '',
-					lastName: '',
+					name: '',
 					email: '',
+					subject: '',
 					phone: '',
 					message: '',
 				});
-			}, 3000);
-		}, 1500);
+				setTimeout(() => setSubmitSuccess(false), 3000);
+			} else {
+				throw new Error('Failed to send message');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+			alert('Failed to send message. Please try again.');
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -119,8 +134,8 @@ const ContactMe = () => {
 											<input
 												className='input-field'
 												type='text'
-												name='lastName'
-												value={formData.lastName}
+												name='subject'
+												value={formData.subject}
 												onChange={handleChange}
 												placeholder='Doe'
 												required
@@ -304,7 +319,7 @@ const ContactMe = () => {
 									project that needs some creative coding, I'd love to hear about it!
 								</p>
 								<a
-									href='/myportfolio-resume.pdf'
+									href='/joe-resume.pdf'
 									target='_blank'
 									rel='noopener noreferrer'
 									className='btn-outline inline-block'
