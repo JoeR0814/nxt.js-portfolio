@@ -93,7 +93,10 @@ const Footer = () => {
 							<span className='font-medium'>Email:</span> Joe.Reis.Dev@gmail.com
 						</p>
 						<p className='text-dark-100 dark:text-light-300 mb-2'>
-							<span className='font-medium'>Location:</span>Shelton, Connecticut
+							<span className='font-medium'>Cell:</span> 475-225-5524
+						</p>
+						<p className='text-dark-100 dark:text-light-300 mb-2'>
+							<span className='font-medium'>Location: </span>Shelton, Connecticut
 						</p>
 						<Link
 							href='/contact'

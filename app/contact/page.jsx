@@ -30,8 +30,8 @@ const ContactMe = () => {
 
 		try {
 			const formDataToSend = new FormData();
-			formDataToSend.append('name', formData.firstName);
-			formDataToSend.append('subject', formData.subject);
+			formDataToSend.append('firstName', formData.firstName);
+			formDataToSend.append('lastName', formData.lastName);
 			formDataToSend.append('email', formData.email);
 			formDataToSend.append('phone', formData.phone);
 			formDataToSend.append('message', formData.message);
@@ -44,9 +44,9 @@ const ContactMe = () => {
 			if (response.ok) {
 				setSubmitSuccess(true);
 				setFormData({
-					name: '',
+					firstName: '',
+					lastName: '',
 					email: '',
-					subject: '',
 					phone: '',
 					message: '',
 				});
@@ -118,7 +118,7 @@ const ContactMe = () => {
 												First Name
 											</label>
 											<input
-												className='input-field'
+												className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
 												type='text'
 												name='firstName'
 												value={formData.firstName}
@@ -132,10 +132,10 @@ const ContactMe = () => {
 												Last Name
 											</label>
 											<input
-												className='input-field'
+												className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
 												type='text'
-												name='subject'
-												value={formData.subject}
+												name='lastName'
+												value={formData.lastName}
 												onChange={handleChange}
 												placeholder='Doe'
 												required
@@ -148,7 +148,7 @@ const ContactMe = () => {
 											Email
 										</label>
 										<input
-											className='input-field'
+											className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
 											type='email'
 											name='email'
 											value={formData.email}
@@ -163,7 +163,7 @@ const ContactMe = () => {
 											Phone Number (Optional)
 										</label>
 										<input
-											className='input-field'
+											className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
 											type='tel'
 											name='phone'
 											value={formData.phone}
@@ -177,7 +177,7 @@ const ContactMe = () => {
 											Message
 										</label>
 										<textarea
-											className='input-field h-32'
+											className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
 											name='message'
 											value={formData.message}
 											onChange={handleChange}
