@@ -319,7 +319,7 @@ const ContactMe = () => {
 									project that needs some creative coding, I'd love to hear about it!
 								</p>
 								<a
-									href='/joe-resume.pdf'
+									href="/Joe's-resume.pdf"
 									target='_blank'
 									rel='noopener noreferrer'
 									className='btn-outline inline-block'
