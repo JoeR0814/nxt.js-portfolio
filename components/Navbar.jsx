@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { BsFillPersonLinesFill, BsSun, BsMoon } from 'react-icons/bs';
+import { BsSun, BsMoon } from 'react-icons/bs';
 import { useTheme } from './ThemeProvider';
 import { motion } from 'framer-motion';
 
@@ -66,6 +66,9 @@ const Navbar = () => {
 					</Link>
 					<Link href='/contact' className='nav-link'>
 						Contact
+					</Link>
+					<Link href='/gcpmct-privacy' className='nav-link'>
+						Privacy
 					</Link>
 
 					{/* Theme Toggle */}
@@ -164,6 +167,15 @@ const Navbar = () => {
 										onClick={() => setNav(false)}
 									>
 										Contact
+									</Link>
+								</li>
+								<li>
+									<Link
+										href='/gcpmct-privacy'
+										className='block py-2 text-dark-200 dark:text-light-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+										onClick={() => setNav(false)}
+									>
+										Privacy
 									</Link>
 								</li>
 							</ul>
